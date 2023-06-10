@@ -29,3 +29,34 @@ sl_loop_end:
 	pop %rbx
 
 	ret                                          # Return
+
+.global string_snake
+string_snake: # (%rax: string) -> ()
+	#### Register Usage ####
+	# rax - Character Pointer
+	#  bl - Current character
+	
+	push %rax
+	push %rbx
+
+	# TODO: I don't like this, reorganize to remove
+	dec %rax
+ss_loop_start:
+	inc %rax
+	movb (%rax), %bl
+
+	cmp $0, %bl
+	je ss_loop_end
+
+	cmp $'-', %bl
+	jne ss_loop_start
+
+	movb $'_', (%rax)
+
+	jmp ss_loop_start
+ss_loop_end:
+
+	pop %rbx
+	pop %rax
+
+	ret
