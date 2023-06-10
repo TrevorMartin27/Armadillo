@@ -7,10 +7,8 @@
 _start:
 	call next_token                              # Read next token
 
-	lea (current_token), %rax                    # Get token length
-	call string_length
-	mov %rax, %rdi
+	call parse_statement
 
 	mov $SYSCALL_EXIT, %rax                      # Exit with length as status code
-	# mov $0, %rdi
+	mov $0, %rdi
 	syscall

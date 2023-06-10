@@ -6,7 +6,7 @@ STDOUT = 1
 .text
 
 .global codegen_string
-codegen_string:
+codegen_string: # (%rsi: buffer, %rdx: length) -> ()
 	push %rax                                    # Save register state
 	push %rcx
 	push %rdx
@@ -28,7 +28,7 @@ codegen_string:
 	ret                                          # Return
 
 .global codegen_cstring
-codegen_cstring:
+codegen_cstring: # (%rsi: string) -> ()
 	# TODO: Do we want to move the syscall in codegen_string into this function?
 	#   that way, we don't need to push as much.
 
